@@ -1,0 +1,36 @@
+# OS X
+.DS_Store
+
+# Sublime Text
+*.sublime-*
+
+release
+
+bin/
+dist/
+www/
+loader/
+
+*~
+*.sw[mnpcod]
+*.log
+*.lock
+*.tmp
+*.tmp.*
+log.txt
+*.sublime-project
+*.sublime-workspace
+*.phar
+
+.stencil/
+.idea/
+.vscode/
+.sass-cache/
+.versions/
+node_modules/
+$RECYCLE.BIN/
+
+.DS_Store
+Thumbs.db
+UserInterfaceState.xcuserstate
+.env
