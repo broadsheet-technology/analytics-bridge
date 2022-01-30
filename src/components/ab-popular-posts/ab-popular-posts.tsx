@@ -1,6 +1,7 @@
 import { Component, State, Prop, h } from '@stencil/core';
-import '@webpress/core';
 import { Connection, Post, Query } from '@webpress/core';
+import '@webpress/core';
+import '@webpress/theme';
 
 // printed to head in functions/inc/popular-posts-api
 declare const BT_AB_PP: {
@@ -31,6 +32,9 @@ export class AnalyticsBridgePopularPosts {
         return;
       }
       let post = this.loadedPosts.find(post => popPost.id == post.id);
+      if (!post) {
+        console.log('something odd happened', this.loadedPosts, this.posts);
+      }
       if (this.renderPost) {
         return this.renderPost(post, popPost.weight);
       } else {

@@ -169,7 +169,7 @@ function bt_analyticsbridge_option_page_html() {
       echo '<pre>';
       printf(
         '<a href="%1$s">%2$s</a>',
-        admin_url('options-general.php?page=analytic-bridge&update'),
+        admin_url('options-general.php?page=analytics-bridge&update'),
         __('Update analytics', 'gapp')
       );
       echo '</pre>';

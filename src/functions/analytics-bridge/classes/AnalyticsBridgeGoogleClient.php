@@ -138,7 +138,7 @@ class analyticsbridge {
       $client->setClientId(analyticsbridge_client_id());
       $client->setClientSecret(analyticsbridge_client_secret());
       $client->setRedirectUri(
-        'https://localhost/wp-admin/options-general.php?page=analytic-bridge'
+        'https://localhost/wp-admin/options-general.php?page=analytics-bridge'
       );
       $client->setAccessType('offline');
       $client->setScopes([

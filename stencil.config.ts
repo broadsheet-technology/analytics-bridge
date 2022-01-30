@@ -7,7 +7,7 @@ export const config: Config = {
     {
       type: 'dist',
       esmLoaderPath: '../loader',
-      copy: [{ src: 'functions/**/*' }, { src: 'functions/**/*.php' }],
+      copy: [{ src: 'functions' }],
     },
     {
       type: 'www',
@@ -15,7 +15,7 @@ export const config: Config = {
       dir: 'bin/wp-content/themes/analytics-bridge.test/',
       copy: [
         { src: 'index.php' },
-        { src: 'functions/' },
+        { src: 'functions', dest: 'etc/' },
         { src: 'assets/' },
         { src: 'style.css' },
         {
