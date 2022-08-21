@@ -148,7 +148,6 @@ class analyticsbridge {
       ]);
 
       if ($auth):
-        error_log('HERERERER 1');
         try {
           $client->setAccessToken(bt_analyticsbridge_option_access_token());
 
@@ -166,14 +165,12 @@ class analyticsbridge {
           }
 
           $this->clientAuthenticated = false;
-          error_log('HERERERER');
           return false;
         } catch (Exception $error) {
         }
       endif;
 
       $this->client = $client;
-      error_log('HERERERER 12');
       return $client;
     endif;
   }

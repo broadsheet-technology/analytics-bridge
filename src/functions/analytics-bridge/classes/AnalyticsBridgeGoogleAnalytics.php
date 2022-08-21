@@ -6,7 +6,6 @@ $analyticsbridge = new analyticsbridgeGoogleAnalytics();
 
 class AnalyticsBridgeGoogleAnalytics {
   public function __construct() {
-    // silence is golden.
   }
 
   /**

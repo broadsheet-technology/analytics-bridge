@@ -10,7 +10,7 @@
  *
  */
 function bt_analyticsbridge_blog_options_admin_style($hook) {
-  if ($hook == 'settings_page_analytic-bridge') {
+  if ($hook == 'settings_page_analytics-bridge') {
     wp_enqueue_style(
       'analyticsbridge_admin_style',
       plugins_url('css/admin.css', dirname(__FILE__)),
@@ -107,7 +107,7 @@ function bt_analyticsbridge_plugin_menu() {
     'Analytics Bridge Options', // $page_title title of the page.
     'Analytics Bridge', // $menu_title the text to be used for the menu.
     'manage_options', // $capability required capability for display.
-    'analytic-bridge', // $menu_slug unique slug for menu.
+    'analytics-bridge', // $menu_slug unique slug for menu.
     'bt_analyticsbridge_option_page_html' // $function callback.
   );
 }
@@ -129,15 +129,15 @@ function bt_analyticsbridge_option_page_html() {
   echo '<div class="wrap">';
   echo '<h2>Analytics Bridge</h2>';
   echo '<form method="post" action="options.php">';
-  settings_fields('analytic-bridge');
-  do_settings_sections('analytic-bridge');
+  settings_fields('analytics-bridge');
+  do_settings_sections('analytics-bridge');
   submit_button();
   echo '</form>';
 
   /*
    * from here down is the cron job kick-off button
    */
-
+  echo 'no hre';
   // check if there is a client id/secret defined.
   if (analyticsbridge_client_id() && analyticsbridge_client_secret()) {
     /* Google has posted an authenticate code back to us. */
@@ -148,9 +148,11 @@ function bt_analyticsbridge_option_page_html() {
 
       // No auth ticket loaded (yet).
     } elseif (!bt_analyticsbridge_option_access_token()) {
+      echo 'herer';
       $client = analytic_bridge_google_client(false);
       echo "<a href='" . $client->createAuthUrl() . "'>" . __('Connect', 'gapp') . '</a>';
     } else {
+      echo 'no hre';
       $client = analytic_bridge_google_client();
       $service = new Google_Service_Oauth2($client);
       $user = $service->userinfo->get();
@@ -193,7 +195,7 @@ function bt_analyticsbridge_google_authenticate_code_post() {
   if (isset($_GET['code'])) {
     $client = analytic_bridge_authenticate_google_client($_GET['code']);
     // get the admin url for the analytics bridge
-    $redirect = 'https://localhost/options-general.php?page=analytic-bridge';
+    $redirect = 'https://localhost/wp-admin/options-general.php?page=analytics-bridge';
     wp_safe_redirect(filter_var($redirect, FILTER_SANITIZE_URL));
     exit();
   }
@@ -217,7 +219,7 @@ function bt_analyticsbridge_register_options() {
     'bt_analyticsbridge_api_settings_section',
     'Google API tokens',
     'bt_analyticsbridge_api_settings_section_intro',
-    'analytic-bridge'
+    'analytics-bridge'
   ); // ($id, $title, $callback, $page)
 
   // Add Client ID field.
@@ -225,7 +227,7 @@ function bt_analyticsbridge_register_options() {
     'bt_analyticsbridge_setting_api_client_id',
     'Google Client ID',
     'bt_analyticsbridge_setting_api_client_id_input',
-    'analytic-bridge',
+    'analytics-bridge',
     'bt_analyticsbridge_api_settings_section'
   ); // ($id, $title, $callback, $page, $section, $args)
 
@@ -234,7 +236,7 @@ function bt_analyticsbridge_register_options() {
     'bt_analyticsbridge_setting_api_client_secret',
     'Google Client Secret',
     'bt_analyticsbridge_setting_api_client_secret_input',
-    'analytic-bridge',
+    'analytics-bridge',
     'bt_analyticsbridge_api_settings_section'
   ); // ($id, $title, $callback, $page, $section, $args)
 
@@ -243,13 +245,13 @@ function bt_analyticsbridge_register_options() {
     'bt_analyticsbridge_setting_api_token',
     'Connect Google Analytics',
     'bt_analyticsbridge_setting_api_token_connect_button',
-    'analytic-bridge',
+    'analytics-bridge',
     'bt_analyticsbridge_api_settings_section'
   ); // ($id, $title, $callback, $page, $section, $args)
 
   // Register our settings.
-  register_setting('analytic-bridge', 'analyticsbridge_setting_api_client_id');
-  register_setting('analytic-bridge', 'analyticsbridge_setting_api_client_secret');
+  register_setting('analytics-bridge', 'analyticsbridge_setting_api_client_id');
+  register_setting('analytics-bridge', 'analyticsbridge_setting_api_client_secret');
 
   /* ------------------------------------------------------------------------------------------
    * Section 2: Site settings.
@@ -260,15 +262,15 @@ function bt_analyticsbridge_register_options() {
     'bt_analyticsbridge_api_settings_section',
     'Google API tokens',
     'bt_analyticsbridge_api_settings_section_intro',
-    'analytic-bridge'
+    'analytics-bridge'
   ); // ($id, $title, $callback, $page)
 
-  // Add a section for our analytic-bridge page.
+  // Add a section for our analytics-bridge page.
   add_settings_section(
     'bt_analyticsbridge_account_settings_section',
     'Google Analytics Property',
     'bt_analyticsbridge_account_settings_section_intro',
-    'analytic-bridge'
+    'analytics-bridge'
   ); // ($id, $title, $callback, $page)
 
   // Add property field
@@ -276,23 +278,23 @@ function bt_analyticsbridge_register_options() {
     'bt_analyticsbridge_setting_account_profile_id',
     'Property View ID',
     'bt_analyticsbridge_setting_account_profile_id_input',
-    'analytic-bridge',
+    'analytics-bridge',
     'bt_analyticsbridge_account_settings_section'
   ); // ($id, $title, $callback, $page, $section, $args)
 
   // Register our settings.
-  register_setting('analytic-bridge', 'bt_analyticsbridge_setting_account_profile_id');
+  register_setting('analytics-bridge', 'bt_analyticsbridge_setting_account_profile_id');
 
   /* ------------------------------------------------------------------------------------------
    * Section 3: Popular Post settings
    * ---------------------------------------------------------------------------------------- */
 
-  // Add a section for our analytic-bridge page.
+  // Add a section for our analytics-bridge page.
   add_settings_section(
     'bt_analyticsbridge_popular_posts_settings_section',
     'Popular Post Settings',
     'bt_analyticsbridge_popular_posts_settings_section_intro',
-    'analytic-bridge'
+    'analytics-bridge'
   ); // ($id, $title, $callback, $page)
 
   // Add property field
@@ -300,12 +302,12 @@ function bt_analyticsbridge_register_options() {
     'bt_analyticsbridge_setting_popular_posts_halflife',
     'Post halflife (in days)',
     'bt_analyticsbridge_setting_popular_posts_halflife_input',
-    'analytic-bridge',
+    'analytics-bridge',
     'bt_analyticsbridge_popular_posts_settings_section'
   ); // ($id, $title, $callback, $page, $section, $args)
 
   // Register our settings.
-  register_setting('analytic-bridge', 'bt_analyticsbridge_setting_popular_posts_halflife');
+  register_setting('analytics-bridge', 'bt_analyticsbridge_setting_popular_posts_halflife');
 }
 add_action('admin_init', 'bt_analyticsbridge_register_options');
 
@@ -353,7 +355,7 @@ function bt_analyticsbridge_popular_posts_settings_section_intro() {
  * @since v0.1
  */
 function bt_analyticsbridge_setting_api_client_id_input() {
-  echo '<input name="analyticsbridge_setting_api_client_id" id="analyticsbridge_setting_api_client_id" type="text" value="' .
+  echo '<input name="analyticsbridge_setting_api_client_id" disabled="true" id="analyticsbridge_setting_api_client_id" type="text" value="' .
     analyticsbridge_client_id() .
     '" class="regular-text" />';
 }
@@ -364,7 +366,7 @@ function bt_analyticsbridge_setting_api_client_id_input() {
  * @since v0.1
  */
 function bt_analyticsbridge_setting_api_client_secret_input() {
-  echo '<input name="analyticsbridge_setting_api_client_secret" id="analyticsbridge_setting_api_client_secret" type="text" value="' .
+  echo '<input name="analyticsbridge_setting_api_client_secret" disabled="true" id="analyticsbridge_setting_api_client_secret" type="text" value="' .
     analyticsbridge_client_secret() .
     '" class="regular-text" />';
 }
@@ -381,6 +383,7 @@ function bt_analyticsbridge_setting_api_token_connect_button() {
     if (!bt_analyticsbridge_option_access_token()) {
       // Analytic Bridge is NOT authenticated.
       // We still need it to create an authentication URL.
+
       $client = analytic_bridge_google_client(false); ?>
 <a href="<?php echo $client->createAuthUrl(); ?>" class='google-button'><?php _e(
   'Connect to Google Analytics',
@@ -396,6 +399,7 @@ function bt_analyticsbridge_setting_api_token_connect_button() {
       // We have an access token, try to use it.
       $client = analytic_bridge_google_client();
       $service = new Google_Service_Oauth2($client);
+
       $user = $service->userinfo->get();
       ?>
 
@@ -406,7 +410,10 @@ function bt_analyticsbridge_setting_api_token_connect_button() {
     </span>
     <?php endif; ?>
     <span class="google-user-name">
-        <?php echo 'Authenticated as ' . $user->getName(); ?>
+        <?php echo 'Authenticated as ' . $user->getName(); ?><br />
+        <?php echo bt_analyticsbridge_option_refresh_token()
+          ? 'has refresh token'
+          : 'no refresh token!!'; ?>
     </span>
 </div>
 <!-- todo: <p class="description">Disconnect this user.</p> -->

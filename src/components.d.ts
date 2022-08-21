@@ -12,7 +12,7 @@ export namespace Components {
     }
     interface AbPopularPosts {
         "global": Connection.Context;
-        "renderPost": (post: Post, weight: number) => any;
+        "renderPost": (post: Post, weight: number, maxWeight: number) => any;
         "size": any;
     }
 }
@@ -40,7 +40,7 @@ declare namespace LocalJSX {
     }
     interface AbPopularPosts {
         "global"?: Connection.Context;
-        "renderPost"?: (post: Post, weight: number) => any;
+        "renderPost"?: (post: Post, weight: number, maxWeight: number) => any;
         "size"?: any;
     }
     interface IntrinsicElements {

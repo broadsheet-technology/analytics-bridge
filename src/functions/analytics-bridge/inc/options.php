@@ -1,11 +1,11 @@
 <?php
 
 function analyticsbridge_client_id() {
-  return get_option('analyticsbridge_setting_api_client_id');
+  return AB_CLIENT_ID;
 }
 
 function analyticsbridge_client_secret() {
-  return get_option('analyticsbridge_setting_api_client_secret');
+  return AB_CLIENT_SECRET;
 }
 
 // authenticated user:

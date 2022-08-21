@@ -6,7 +6,7 @@ services:
       context: config/nginx
     container_name: analytics-bridge.test-nginx
     links:
-      - analytics-bridge.test-wordpress
+      - wordpress
     ports:
       - 80:80
       - 443:443
@@ -38,6 +38,8 @@ services:
         /* Domain */
         define('WP_HOME','https://${SITE_URL}');
         define('WP_SITEURL','https://${SITE_URL}');
+        define('AB_CLIENT_ID','${AB_CLIENT_ID}');
+        define('AB_CLIENT_SECRET','${AB_CLIENT_SECRET}');
 
   mariadb:
     container_name: analytics-bridge.test-mariadb

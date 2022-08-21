@@ -14,7 +14,7 @@ declare const BT_AB_PP: {
 })
 export class AnalyticsBridgePopularPosts {
   @Prop() global: Connection.Context;
-  @Prop() renderPost: (post: Post, weight: number) => any;
+  @Prop() renderPost: (post: Post, weight: number, maxWeight: number) => any;
   @Prop() size;
 
   private connection;
@@ -27,16 +27,14 @@ export class AnalyticsBridgePopularPosts {
     if (!this.loadedPosts) {
       return 'loading...';
     }
+    let maxWeight = this.posts[0].weight;
     return this.posts.map((popPost, index) => {
       if (index >= this.size) {
         return;
       }
       let post = this.loadedPosts.find(post => popPost.id == post.id);
-      if (!post) {
-        console.log('something odd happened', this.loadedPosts, this.posts);
-      }
       if (this.renderPost) {
-        return this.renderPost(post, popPost.weight);
+        return this.renderPost(post, popPost.weight, maxWeight);
       } else {
         return <wp-title post={post} permalink={true} />;
       }
