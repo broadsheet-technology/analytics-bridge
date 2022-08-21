@@ -1,6 +1,6 @@
 {
   "name": "@broadsheet.technology/analytics-bridge",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "WordPress bridge for Google Analytics",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",

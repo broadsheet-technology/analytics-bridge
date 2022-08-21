@@ -119,9 +119,7 @@ class analyticsbridge {
       $client->setApplicationName('Analytic_Bridge');
       $client->setClientId(analyticsbridge_client_id());
       $client->setClientSecret(analyticsbridge_client_secret());
-      $client->setRedirectUri(
-        'https://localhost/wp-admin/options-general.php?page=analytics-bridge'
-      );
+      $client->setRedirectUri(site_url('/wp-admin/options-general.php?page=analytics-bridge'));
 
       $client->setAccessType('offline');
       $client->setPrompt('select_account consent');
