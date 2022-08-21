@@ -85,7 +85,6 @@ class analyticsbridge {
    */
   public function getClient($auth = true, &$e = null) {
     if ($auth && $this->client && $this->clientAuthenticated) {
-      error_log('HERERERER 122');
       return $this->client;
     }
 
@@ -104,23 +103,6 @@ class analyticsbridge {
       }
 
       return false;
-
-      // We want to authenticate and there is no client id or client secret.
-      // Client id and secret are needed to create the redirect button, to send us to Google oAuth page
-      // See https://developers.google.com/identity/protocols/OAuth2
-
-      // We have everything we need.
-
-      // Create a Google Client.
-
-      /*
-       * If there's an access token set, try to authenticate with it.
-       * Otherwise we just return without any authenticating.
-       */
-
-      // return (by reference) error information.
-
-      // Return our client.
     elseif ($auth && !(analyticsbridge_client_id() && analyticsbridge_client_secret())):
       if ($e) {
         $e = [];
@@ -140,7 +122,10 @@ class analyticsbridge {
       $client->setRedirectUri(
         'https://localhost/wp-admin/options-general.php?page=analytics-bridge'
       );
+
       $client->setAccessType('offline');
+      $client->setPrompt('select_account consent');
+
       $client->setScopes([
         'https://www.googleapis.com/auth/analytics.readonly',
         'https://www.googleapis.com/auth/userinfo.email',
@@ -195,7 +180,6 @@ function analytic_bridge_google_client($auth = true, &$e = null) {
   if ($e != null) {
     error_log($e);
   }
-  error_log('here...');
   return $client;
 }
 

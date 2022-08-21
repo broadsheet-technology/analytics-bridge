@@ -137,7 +137,6 @@ function bt_analyticsbridge_option_page_html() {
   /*
    * from here down is the cron job kick-off button
    */
-  echo 'no hre';
   // check if there is a client id/secret defined.
   if (analyticsbridge_client_id() && analyticsbridge_client_secret()) {
     /* Google has posted an authenticate code back to us. */
@@ -148,11 +147,9 @@ function bt_analyticsbridge_option_page_html() {
 
       // No auth ticket loaded (yet).
     } elseif (!bt_analyticsbridge_option_access_token()) {
-      echo 'herer';
       $client = analytic_bridge_google_client(false);
       echo "<a href='" . $client->createAuthUrl() . "'>" . __('Connect', 'gapp') . '</a>';
     } else {
-      echo 'no hre';
       $client = analytic_bridge_google_client();
       $service = new Google_Service_Oauth2($client);
       $user = $service->userinfo->get();
