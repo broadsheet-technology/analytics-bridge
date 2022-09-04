@@ -13,7 +13,7 @@ function bt_analyticsbridge_blog_options_admin_style($hook) {
   if ($hook == 'settings_page_analytics-bridge') {
     wp_enqueue_style(
       'analyticsbridge_admin_style',
-      plugins_url('css/admin.css', dirname(__FILE__)),
+      plugins_url('css/admin.css', __DIR__),
       false,
       '0.1'
     );

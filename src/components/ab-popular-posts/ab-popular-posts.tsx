@@ -46,7 +46,7 @@ export class AnalyticsBridgePopularPosts {
       return;
     }
 
-    this.connection = new Connection(this.global.serverInfo);
+    this.connection = new Connection(this.global.serverInfo, []);
 
     if (this.query) {
       return;
